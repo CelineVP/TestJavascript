@@ -9,7 +9,6 @@
 </head>
 <body>
 
-
   <div class="keys">
     <div data-key="65" class="key">
       <kbd>A</kbd>
@@ -62,24 +61,33 @@
 <script>
   function removeTransition(e) {
     if (e.propertyName !== 'transform') return;
-    e.target.classList.remove('playing');
+    e.target.classList.remove('playing'); // classList permet de créer des intéractions (supprimer class 'playing')
   }
+  // fonction qui réagit à l'action de l'user comme appuyer sur une touche
+  // lorsque l'user appuit la class 'playing' est ajouté à l'élément (e) enclenchant une transition
+  // lorsque transition est terminé la classe est suprimé permettant d'assurer une rénitialsation
 
-  function playSound(e) {
+  function playSound(e) { // jouer un son en appuyant sur une touche
     const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    // selectionne un element audio dont attribut data-key correspond à valeur de la touche. La valeur est stocké dans kkeycode
     const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    // selectionne dans div data-key qui correspond à la touche préssé
     if (!audio) return;
-
-    key.classList.add('playing');
-    audio.currentTime = 0;
-    audio.play();
+    // si element audio existe la retourner sinon la fonction se termine
+    key.classList.add('playing'); // ajouter la class 'playing' à l'élement div (interaction visuelle)
+    audio.currentTime = 0; // propriété qui assure sur le son est joué depuis le début à chaque fois
+    audio.play(); // appel la methode play pour lire le son
   }
 
-  const keys = Array.from(document.querySelectorAll('.key'));
+  const keys = Array.from(document.querySelectorAll('.key')); // selectionne tous les élement avec la class 'key' et
+  // créer un tableau avec tous les éléments de la page
   keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  // ajoute un écouteur d'evénement 'transitionend' à chaque élément du tableau keys
+  // lorsque la transition css se termine, la fonction removeTransition est appelée
   window.addEventListener('keydown', playSound);
+  // ajoute un écouteur 'keydown' à la fenêtre windows,
+  // lorsque touche est enfoncé la fonction playSound est appelée
 </script>
-
 
 </body>
 </html>
