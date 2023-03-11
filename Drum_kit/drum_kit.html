@@ -61,7 +61,7 @@
 <script>
   function removeTransition(e) {
     if (e.propertyName !== 'transform') return;
-    e.target.classList.remove('playing'); // classList permet de créer des intéractions (supprimer class 'playing')
+    e.target.classList.remove('playing'); // classList permet de créer des intéractions sur class (supprimer class 'playing')
   }
   // fonction qui réagit à l'action de l'user comme appuyer sur une touche
   // lorsque l'user appuit la class 'playing' est ajouté à l'élément (e) enclenchant une transition
