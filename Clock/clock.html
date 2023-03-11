@@ -20,7 +20,6 @@
   html {
     background: url(back.jpg);
     background-size: cover;
-    font-family: 'helvetica neue';
     text-align: center;
     font-size: 10px;
   }
@@ -44,7 +43,7 @@
     padding: 2rem;
     box-shadow:
       0 0 0 4px rgba(0,0,0,0.1),
-      inset 0 0 0 3px #01ebed0a,,
+      inset 0 0 0 3px #01ebed0a,
       inset 0 0 10px black,
       0 0 10px rgba(0,0,0,0.2);
   }
@@ -53,7 +52,7 @@
     position: relative;
     width: 100%;
     height: 100%;
-    transform: translateY(-3px); /* account for the height of the clock hands */
+    transform: translateY(-3px); 
   }
 
   .hand {
@@ -75,9 +74,9 @@ const minsHand = document.querySelector('.min-hand');
 const hourHand = document.querySelector('.hour-hand');
 // selectionne les éléments html qui représentent les aiguilles
 
-function setDate() {
-  const now = new Date();
-
+function setDate() { // fonction appelé toutes les secondes en utilisant serInterval()
+  const now = new Date(); // fonction récupère la date
+  // puis calcule les degrés de rotation pour chaque aiguille en fonction de l'heure
   const seconds = now.getSeconds();
   const secondsDegrees = ((seconds / 60) * 360) + 90;
   secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
@@ -91,7 +90,7 @@ function setDate() {
   hourHand.style.transform = `rotate(${hourDegrees}deg)`;
 }
 
-setInterval(setDate, 1000);
+setInterval(setDate, 1000); // appelle la fonction setDate toutes les secondes
 
 setDate();
 
