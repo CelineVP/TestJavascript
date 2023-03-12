@@ -9,17 +9,17 @@
   <h2>Update CSS Variables with <span class='hl'>JS</span></h2>
 
   <div class="controls">
-    <label for="spacing">Spacing:</label>
+    <label for="spacing">Espacement :</label>
     <input id="spacing" type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
 
-    <label for="blur">Blur:</label>
+    <label for="blur">Floutage :</label>
     <input id="blur" type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
 
-    <label for="base">Base Color</label>
+    <label for="base">Couleurs</label>
     <input id="base" type="color" name="base" value="#ffc600">
   </div>
 
-  <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
+  <img src="back.jpg" height="400" width="500">
 
   <style>
     :root {
@@ -37,10 +37,6 @@
     .hl {
       color: var(--base);
     }
-
-    /*
-      misc styles, nothing to do with CSS variables
-    */
 
     body {
       text-align: center;
@@ -61,17 +57,19 @@
   </style>
 
   <script>
-    const inputs = document.querySelectorAll('.controls input');
+    const inputs = document.querySelectorAll('.controls input'); // selectionne tous les éléments de la class
 
     function handleUpdate() {
-      const suffix = this.dataset.sizing || '';
+      const suffix = this.dataset.sizing || ''; // récupère la value avec this.value et sizing
+      // si la value n'est pas définie alors la chaine vide est utilisé à la place
       document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
-    }
+    } // met à jour le css en utilisant setProperty, propriété est identifié par le nom de l'élément de form input
+      // stocké dans this.name
 
     inputs.forEach(input => input.addEventListener('change', handleUpdate));
     inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
+    // ecouteur d'événement est ajouté à chaque élément du form input avec change puis mousemouve (temps réel)
   </script>
-
 
 </body>
 </html>
