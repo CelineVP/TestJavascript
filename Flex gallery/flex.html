@@ -8,9 +8,10 @@
 </head>
 <body>
   <style>
+
     html {
       box-sizing: border-box;
-      background: #ffc600;
+      background: #75d2f7;
       font-family: 'helvetica neue';
       font-size: 20px;
       font-weight: 200;
@@ -131,13 +132,13 @@
     function toggleOpen() {
       console.log('Hello');
       this.classList.toggle('open');
-    }
+    } // utilise ou non la class open lorsqu'on click
 
     function toggleActive(e) {
       console.log(e.propertyName);
       if (e.propertyName.includes('flex')) {
         this.classList.toggle('open-active');
-      }
+      } // utilise la class flex pour grossir ou réduite et rajoute phrases
     }
 
     panels.forEach(panel => panel.addEventListener('click', toggleOpen));
