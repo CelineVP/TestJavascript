@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5 Canvas</title>
+  <link rel="icon" href="https://fav.farm/✅" />
+</head>
+<body>
+
+<canvas id="draw" width="800" height="800"></canvas>
+
+<script>
+
+const canvas = document.querySelector('#draw');
+const ctx = canvas.getContext('2d'); // dans page html contexte en 2D
+canvas.width = window.innerWidth; // toutes la largeur de l'écran pour utiliser canvas
+canvas.height = window.innerHeight; // toute la hauteur de l'écran pour utiliser canvas
+ctx.strokeStyle = '#BADA55'; // couleur des lignes
+ctx.lineJoin = 'round'; // style des joins de ligne
+ctx.lineCap = 'round'; // style des extrémités des lignes
+ctx.lineWidth = 100; // épaisseur des lignes
+// ctx.globalCompositeOperation = 'multiply';
+
+let isDrawing = false; // indique si souris est enfoncé
+let lastX = 0; // coordonnés du point de départ
+let lastY = 0; // coordonnés du point de départ
+let hue = 0; // change la couleur
+let direction = true; // largeur du dessin
+
+function draw(e) {
+  if (!isDrawing) return; // stop the fn from running when they are not moused down
+  console.log(e);
+  ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`; // color fun
+  ctx.beginPath();
+  // dessin par de
+  ctx.moveTo(lastX, lastY);
+  // dessin arrivé à
+  ctx.lineTo(e.offsetX, e.offsetY); // e.offset correspond à la position de la souris
+  ctx.stroke();
+  [lastX, lastY] = [e.offsetX, e.offsetY];
+
+  hue++; // change la color
+  if (hue >= 360) {
+    hue = 0;
+  } // épaisseur de la color
+  if (ctx.lineWidth >= 100 || ctx.lineWidth <= 1) {
+    direction = !direction;
+  }
+
+  if(direction) {
+    ctx.lineWidth++;
+  } else {
+    ctx.lineWidth--;
+  }
+
+}
+
+canvas.addEventListener('mousedown', (e) => {
+  isDrawing = true;
+  [lastX, lastY] = [e.offsetX, e.offsetY];
+}); // lorsque clic alors isDrawing devient true et last et offset sont mis à jour
+
+
+canvas.addEventListener('mousemove', draw); // dessine dans les coordonnées précédentes
+canvas.addEventListener('mouseup', () => isDrawing = false); // lorsque lache la souris alors stop (false)
+canvas.addEventListener('mouseout', () => isDrawing = false); // retour à 0
+
+</script>
+
+<style>
+  
+  html, body {
+    margin: 0;
+  }
+</style>
+
+</body>
+</html>
