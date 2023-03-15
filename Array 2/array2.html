@@ -42,23 +42,24 @@
     // Array.prototype.find()
     // Find is like filter, but instead returns just the one you are looking for
     // find the comment with the ID of 823423
-
-
+    // const comment = comment.find(function(comments) {
+    //   if (comments[id] === 823423) {
+    //     return true
+    //   }
+    // });
     const comment = comments.find(comment => comment.id === 823423);
-
-    console.log(comment);
+    console.log(comment); // .find permet de trouver le comment avec id
 
     // Array.prototype.findIndex()
     // Find the comment with this ID
     // delete the comment with the ID of 823423
     const index = comments.findIndex(comment => comment.id === 823423);
-    console.log(index);
+    console.log(index); // .findIndex renvoit l'index dans tableau demandé
 
     // comments.splice(index, 1);
-
-    const newComments = [
-      ...comments.slice(0, index),
-      ...comments.slice(index + 1)
+    const newComments = [ // .slice crée une copie du tableau
+      ...comments.slice(0, index), // copie comment du début à la fin
+      ...comments.slice(index + 1) // copie comment à partir de élément suivant
     ];
 
   </script>
