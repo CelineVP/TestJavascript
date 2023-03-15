@@ -19,7 +19,7 @@ ctx.strokeStyle = '#BADA55'; // couleur des lignes
 ctx.lineJoin = 'round'; // style des joins de ligne
 ctx.lineCap = 'round'; // style des extrémités des lignes
 ctx.lineWidth = 100; // épaisseur des lignes
-// ctx.globalCompositeOperation = 'multiply';
+// ctx.globalCompositeOperation = 'multiply'; avec surperpostion ça devient noir
 
 let isDrawing = false; // indique si souris est enfoncé
 let lastX = 0; // coordonnés du point de départ
@@ -32,17 +32,17 @@ function draw(e) {
   console.log(e);
   ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`; // color fun
   ctx.beginPath();
-  // dessin par de
+  // dessin part de
   ctx.moveTo(lastX, lastY);
-  // dessin arrivé à
+  // dessin arrive à
   ctx.lineTo(e.offsetX, e.offsetY); // e.offset correspond à la position de la souris
-  ctx.stroke();
+  ctx.stroke(); // chemin du dessin
   [lastX, lastY] = [e.offsetX, e.offsetY];
 
   hue++; // change la color
   if (hue >= 360) {
     hue = 0;
-  } // épaisseur de la color
+  } // épaisseur de la color se modifit
   if (ctx.lineWidth >= 100 || ctx.lineWidth <= 1) {
     direction = !direction;
   }
@@ -60,7 +60,6 @@ canvas.addEventListener('mousedown', (e) => {
   [lastX, lastY] = [e.offsetX, e.offsetY];
 }); // lorsque clic alors isDrawing devient true et last et offset sont mis à jour
 
-
 canvas.addEventListener('mousemove', draw); // dessine dans les coordonnées précédentes
 canvas.addEventListener('mouseup', () => isDrawing = false); // lorsque lache la souris alors stop (false)
 canvas.addEventListener('mouseout', () => isDrawing = false); // retour à 0
@@ -68,7 +67,7 @@ canvas.addEventListener('mouseout', () => isDrawing = false); // retour à 0
 </script>
 
 <style>
-  
+
   html, body {
     margin: 0;
   }
