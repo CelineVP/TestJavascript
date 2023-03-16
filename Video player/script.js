@@ -32,12 +32,12 @@ function handleProgress() { // placement sur  la barre de progression (remplissa
   progressBar.style.flexBasis = `${percent}%`;
 }
 
-function scrub(e) {
+function scrub(e) { // coordonnées pour la vitesse
   const scrubTime = (e.offsetX / progress.offsetWidth) * video.duration;
   video.currentTime = scrubTime;
 }
 
-/* Hook up the event listeners */
+/* Hook up the event listeners */ // appelle les foncitoin en fonction du click
 video.addEventListener('click', togglePlay);
 video.addEventListener('play', updateButton);
 video.addEventListener('pause', updateButton);

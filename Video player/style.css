@@ -10,9 +10,9 @@ body {
   margin: 0;
   padding: 0;
   display: flex;
-  background: #7A419B;
+  background: #417d9b;
   min-height: 100vh;
-  background: linear-gradient(135deg, #7c1599 0%,#921099 48%,#7e4ae8 100%);
+  background: linear-gradient(135deg, #158799 0%,#109992 48%,#4a55e8 100%);
   background-size: cover;
   align-items: center;
   justify-content: center;
@@ -105,7 +105,6 @@ body {
 }
 
 /* unholy css to style input type="range" */
-
 input[type=range] {
   -webkit-appearance: none;
   background: transparent;
