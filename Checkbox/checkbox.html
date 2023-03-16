@@ -97,30 +97,29 @@
 <script>
 const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
 // evenement click à chaque case coché
-let lastChecked;
+let lastChecked; // stocke la dernière case coché
 
 function handleCheck(e) {
-  // Vérirfiesi la touche majuscule est enfoncé
+  // Vérirfie si la touche majuscule est enfoncé
   let inBetween = false;
-  if (e.shiftKey && this.checked) {
+  if (e.shiftKey && this.checked) { // si la touche shift est enfoncé alors coche les cases entre deux coche
     // passer sur chaque case
     checkboxes.forEach(checkbox => {
       console.log(checkbox);
       if (checkbox === this || checkbox === lastChecked) {
         inBetween = !inBetween;
-        console.log('Starting to check them in between!');
+        console.log('Starting to check them in between!'); // pour tester dans la console
       }
-
       if (inBetween) {
-        checkbox.checked = true;
+        checkbox.checked = true; // toutes les cases cochés si true
       }
     });
   }
-
   lastChecked = this;
 }
 
 checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
+// appelle cette fonction sur chaque clic
 
 </script>
 </body>
