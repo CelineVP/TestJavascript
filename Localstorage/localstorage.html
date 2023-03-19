@@ -28,25 +28,21 @@
   const items = JSON.parse(localStorage.getItem('items')) || [];
   // initialisé avec data stockés dans localstorage du navigator. Si 0 data alors tableau vide
 
-  function addItem(e) { // form html qui contient champs txt et btn pour ajouter élément à une list
+  function addItem(e) {
     e.preventDefault();
-    const text = (this.querySelector('[name=item]')).value;
-    const item = {
+    const text = (this.querySelector('[name=item]')).value; // appellée lorsque user submit form en cliquand sur le btn ajouter
+    const item = {  // la fonction récupère le txt et cré un objet item avec 2 propriétés : text done
       text,
-      done: false
+      done: false // false tant élément n'est pas coché
     };
-    La fonction addItem est appelée lorsque l'utilisateur soumet le formulaire en cliquant sur le bouton
-    d'ajout. Elle récupère le texte entré dans le champ texte et crée un objet item avec deux propriétés :
-    text et done. La propriété text contient le texte entré par l'utilisateur, et la propriété done est initialisée
-    à false pour indiquer que l'élément n'est pas encore coché.
-    items.push(item);
-    populateList(items, itemsList);
+    items.push(item); // objet item ajouté au tableau items pour être utilisé pour la list html avec fn populateList
+    populateList(items, itemsList); // parcours le tableau items et ajoute chaque élément de la list html
     localStorage.setItem('items', JSON.stringify(items));
     this.reset();
   }
 
-  function populateList(plates = [], platesList) {
-    platesList.innerHTML = plates.map((plate, i) => {
+  function populateList(plates = [], platesList) { // appelé à chaque fois qu'un élément est ajouré à la list
+    platesList.innerHTML = plates.map((plate, i) => { // met à jour l'affichage de la list et stock les data dans localstorage
       return `
         <li>
           <input type="checkbox" data-index=${i} id="item${i}" ${plate.done ? 'checked' : ''} />
@@ -54,21 +50,21 @@
         </li>
       `;
     }).join('');
-  }
+  }  // populaList prend le tableau plates et le transform en list html
 
-  function toggleDone(e) {
-    if (!e.target.matches('input')) return; // skip this unless it's an input
+  function toggleDone(e) { // appelé lorsqu'un élément de la list est coché
+    if (!e.target.matches('input')) return;
     const el = e.target;
-    const index = el.dataset.index;
-    items[index].done = !items[index].done;
-    localStorage.setItem('items', JSON.stringify(items));
+    const index = el.dataset.index; // récupère l'index à partir de l'attribut dataindex
+    items[index].done = !items[index].done; // et inverse la valeur done
+    localStorage.setItem('items', JSON.stringify(items)); // met à jour localstorage avec la fn populateList
     populateList(items, itemsList);
   }
 
-  addItems.addEventListener('submit', addItem);
-  itemsList.addEventListener('click', toggleDone);
+  addItems.addEventListener('submit', addItem); // événement de soumission de form
+  itemsList.addEventListener('click', toggleDone); // événement de toggle avec clic
 
-  populateList(items, itemsList);
+  populateList(items, itemsList); // appelé pour afficher la list initial
 
 </script>
 
