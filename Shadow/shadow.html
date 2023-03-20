@@ -37,19 +37,19 @@
 
 <script>
   const hero = document.querySelector('.hero'); // selectionne une class
-  const text = hero.querySelector('h1');
+  const text = hero.querySelector('h1'); // modifiable
   const walk = 500; // taille de 500px
 
   function shadow(e) {
-    const { offsetWidth: width, offsetHeight: height } = hero; // 
-    let { offsetX: x, offsetY: y } = e;
+    const { offsetWidth: width, offsetHeight: height } = hero; // var hero en fonction de la position
+    let { offsetX: x, offsetY: y } = e; // variable e qui se modifie en fonction
 
     if (this !== e.target) {
       x = x + e.target.offsetLeft;
       y = y + e.target.offsetTop;
     }
 
-    const xWalk = Math.round((x / width * walk) - (walk / 2));
+    const xWalk = Math.round((x / width * walk) - (walk / 2)); // var de position
     const yWalk = Math.round((y / height * walk) - (walk / 2));
 
     text.style.textShadow = `
@@ -57,7 +57,7 @@
       ${xWalk * -1}px ${yWalk}px 0 rgba(0,255,255,0.7),
       ${yWalk}px ${xWalk * -1}px 0 rgba(0,255,0,0.7),
       ${yWalk * -1}px ${xWalk}px 0 rgba(0,0,255,0.7)
-    `;
+    `; // style du text modifié en fonction de la position
   }
 
   hero.addEventListener('mousemove', shadow); // événement qui suit la souris et appelle la fn shadow
