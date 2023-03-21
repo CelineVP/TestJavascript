@@ -38,19 +38,19 @@
 <script>
   const hero = document.querySelector('.hero'); // selectionne une class
   const text = hero.querySelector('h1'); // modifiable
-  const walk = 500; // taille de 500px
+  const walk = 500; // distance max de 500px de l'ombre
 
-  function shadow(e) {
+  function shadow(e) { // caclcule la position de la souris en fonction de hero
     const { offsetWidth: width, offsetHeight: height } = hero; // var hero en fonction de la position
     let { offsetX: x, offsetY: y } = e; // variable e qui se modifie en fonction
 
-    if (this !== e.target) {
+    if (this !== e.target) { // les coordonnées sont ajusté selon l'interieur de hero ou la position de la souris
       x = x + e.target.offsetLeft;
       y = y + e.target.offsetTop;
     }
-
-    const xWalk = Math.round((x / width * walk) - (walk / 2)); // var de position
-    const yWalk = Math.round((y / height * walk) - (walk / 2));
+  
+    const xWalk = Math.round((x / width * walk) - (walk / 2)); // calcul la distance entre la souris et les bords de hero
+    const yWalk = Math.round((y / height * walk) - (walk / 2)); // en utilisant la largeur et la hauteur de hero
 
     text.style.textShadow = `
       ${xWalk}px ${yWalk}px 0 rgba(255,0,255,0.7),
