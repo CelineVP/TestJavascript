@@ -186,22 +186,22 @@
 
   const timeNodes = Array.from(document.querySelectorAll('[data-time]')); // selectionne class data-time sous forme d'array
 
-  const seconds = timeNodes //transformer la fome du temps
-    .map(node => node.dataset.time)
-    .map(timeCode => {
-      const [mins, secs] = timeCode.split(':').map(parseFloat); // sépare mins, sec par : et arrondi le en numéric
-      return (mins * 60) + secs;
+  const seconds = timeNodes // converti et stocke
+    .map(node => node.dataset.time) // extrait les valeurs de temps de chaque élément html
+    .map(timeCode => { // et la transforme
+      const [mins, secs] = timeCode.split(':').map(parseFloat); // sépare mins, sec par : et converti en nombre entier (parse)
+      return (mins * 60) + secs; // stocke dans variables mins et sec et multipli par 60 puis ajoute les secs
     })
-    .reduce((total, vidSeconds) => total + vidSeconds); // convertir les secondes
+    .reduce((total, vidSeconds) => total + vidSeconds); // ajoute les durée et stocke
 
     let secondsLeft = seconds;
-    const hours = Math.floor(secondsLeft / 3600); // arrondi
-    secondsLeft = secondsLeft % 3600; // le modulo : ce qu'il reste 
+    const hours = Math.floor(secondsLeft / 3600); // permet d'obtenir les seconds en heures (arrondir)
+    secondsLeft = secondsLeft % 3600; // le modulo : ce qu'il reste en sec
 
-    const mins = Math.floor(secondsLeft / 60);
-    secondsLeft = secondsLeft % 60;
+    const mins = Math.floor(secondsLeft / 60); // permet d'obtenir les mins et arrondir
+    secondsLeft = secondsLeft % 60; // ce qu'il rest en sec
 
-    console.log(hours, mins, secondsLeft);
+    console.log(hours, mins, secondsLeft); // affiche
 
 </script>
 </body>
