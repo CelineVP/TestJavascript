@@ -50,14 +50,15 @@ const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'N
 
 function strip(bandName) {
   return bandName.replace(/^(a |the |an )/i, '').trim();
-} // remplace les expréssion par un vide (the old = old)
+} // remplace les expréssion  a the et an par un vide (the old = old) et renvoi bands
 
 const sortedBands = bands.sort((a, b) => strip(a) > strip(b) ? 1 : -1);// bands est trier,soit remonté soit descendu +1 -1
+// fn de comparaison
 
 document.querySelector('#bands').innerHTML = // insert la list dans html
-  sortedBands
+  sortedBands // généré à partir du tableau déjà trié
     .map(band => `<li>${band}</li>`)
-    .join('');
+    .join(''); // concaténer toutes les chaines de caractères
 
 console.log(sortedBands);
 
