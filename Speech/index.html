@@ -11,32 +11,33 @@
   </div>
 
 <script>
-  window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
-  const recognition = new SpeechRecognition();
-  recognition.interimResults = true;
-  recognition.lang = 'en-US';
+  window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition; // existance ou non de reconnaissance vocale sur navigateur
 
-  let p = document.createElement('p');
-  const words = document.querySelector('.words');
+  const recognition = new SpeechRecognition(); // créer une nouvelle reco vocale
+  recognition.interimResults = true; // retourne la reconnaissance au fur et à mesur du vocal (true)
+  recognition.lang = 'fr-FR'; // définir la langue
+
+  let p = document.createElement('p'); // créer élément p avec la class p
+  const words = document.querySelector('.words'); // class avec la zone de texte
   words.appendChild(p);
 
-  recognition.addEventListener('result', e => {
+  recognition.addEventListener('result', e => { // stocke la reco dans un array à chaque fois que c'est possible
     const transcript = Array.from(e.results)
       .map(result => result[0])
-      .map(result => result.transcript)
+      .map(result => result.transcript) // retranscrire dans l'html
       .join('');
 
-      const poopScript = transcript.replace(/poop|poo|shit|dump/gi, '💩');
+      const poopScript = transcript.replace(/poop|poo|shit|dump/gi, '💩'); // remplace mot obscène par 💩
       p.textContent = poopScript;
 
-      if (e.results[0].isFinal) {
+      if (e.results[0].isFinal) { // si fin alors on repart sur un nouveau p
         p = document.createElement('p');
         words.appendChild(p);
       }
   });
 
-  recognition.addEventListener('end', recognition.start);
+  recognition.addEventListener('end', recognition.start); // après end on peut recommencer sans activer manuellement
 
   recognition.start();
 
