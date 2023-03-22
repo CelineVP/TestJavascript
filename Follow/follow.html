@@ -27,28 +27,28 @@
     </div>
 
 <script>
-  const triggers = document.querySelectorAll('a');
-  const highlight = document.createElement('span');
+  const triggers = document.querySelectorAll('a'); // selectionne class a
+  const highlight = document.createElement('span'); // seclectionne class span
   highlight.classList.add('highlight');
-  document.body.appendChild(highlight);
+  document.body.appendChild(highlight); // crée un nouveau élément et ajoute la méthode
 
   function highlightLink() {
-    const linkCoords = this.getBoundingClientRect();
+    const linkCoords = this.getBoundingClientRect(); // la position et la taille de l'élément survolé est stocké
     console.log(linkCoords);
-    const coords = {
+    const coords = { // calcule la position en fonction des coordonnées
       width: linkCoords.width,
       height: linkCoords.height,
       top: linkCoords.top + window.scrollY,
       left: linkCoords.left + window.scrollX
     };
 
-    highlight.style.width = `${coords.width}px`;
-    highlight.style.height = `${coords.height}px`;
-    highlight.style.transform = `translate(${coords.left}px, ${coords.top}px)`;
+    highlight.style.width = `${coords.width}px`; // définit la largeur
+    highlight.style.height = `${coords.height}px`; // la hauteur
+    highlight.style.transform = `translate(${coords.left}px, ${coords.top}px)`; // définit la position de l'élément
 
   }
 
-  triggers.forEach(a => a.addEventListener('mouseenter', highlightLink));
+  triggers.forEach(a => a.addEventListener('mouseenter', highlightLink)); // appellé lorsque l'élément a est survolé avec souris
 
 </script>
 </body>
