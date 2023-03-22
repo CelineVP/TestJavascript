@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Speech Synthesis</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="https://fav.farm/✅" />
+</head>
+<body>
+
+    <div class="voiceinator">
+
+      <h1>The Voiceinator 5000</h1>
+
+      <select name="voice" id="voices">
+        <option value="">Select A Voice</option>
+      </select>
+
+      <label for="rate">Rate:</label>
+      <input name="rate" type="range" min="0" max="3" value="1" step="0.1">
+
+      <label for="pitch">Pitch:</label>
+
+      <input name="pitch" type="range" min="0" max="2" step="0.1">
+      <textarea name="text">Hello! I love JavaScript 👍</textarea>
+      <button id="stop">Stop!</button>
+      <button id="speak">Speak</button>
+
+    </div>
+
+<script>
+  const msg = new SpeechSynthesisUtterance(); // créer un nouveau enregisrtement
+  let voices = []; // array vide pour stocker les voix
+  const voicesDropdown = document.querySelector('[name="voice"]');
+  const options = document.querySelectorAll('[type="range"], [name="text"]');
+  const speakButton = document.querySelector('#speak');
+  const stopButton = document.querySelector('#stop');
+  msg.text = document.querySelector('[name="text"]').value; // contenu récupéré et stocké dans text (récupere txt à prononcer)
+
+  function populateVoices() { // remplir le menu déroulant des voix proposé par le navigator
+    voices = this.getVoices(); // récupère les voix disponibles
+    voicesDropdown.innerHTML = voices
+      // .filter(voice => voice.lang.includes('fr')) // filtrer les voix en anglais
+      .map(voice => `<option value="${voice.name}">${voice.name} (${voice.lang})</option>`)
+      .join(''); // créer list d'options déroulante avec le nom et la langue
+  } // puis envoit la chaine à voicesDropdown
+
+  function setVoice() { // trouver la voix selectionner en fonction de sa valeur
+    msg.voice = voices.find(voice => voice.name === this.value); // affecte la voix au message
+    toggle(); // appelle toggle
+  }
+
+  function toggle(startOver = true) { // permet de démarrer ou arreter la lecture
+    speechSynthesis.cancel();
+    if (startOver) {
+      speechSynthesis.speak(msg);
+    }
+  }
+
+  function setOption() { // affiche le nom et sa value dans la console
+    console.log(this.name, this.value);
+    msg[this.name] = this.value; // stocker dans msg
+    toggle();
+  }
+
+  speechSynthesis.addEventListener('voiceschanged', populateVoices); // lorsqu'on est sur la list des voix
+  voicesDropdown.addEventListener('change', setVoice); // lorsque voix est selectionné
+  options.forEach(option => option.addEventListener('change', setOption));
+  speakButton.addEventListener('click', toggle);
+  stopButton.addEventListener('click', () => toggle(false));
+
+</script>
+
+</body>
+</html>
