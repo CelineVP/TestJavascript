@@ -60,15 +60,15 @@
     /*Compass: https://thenounproject.com/search/?q=compass&i=592352*/
   </style>
   <script>
-    const arrow = document.querySelector('.arrow');
-    const speed = document.querySelector('.speed-value');
+    const arrow = document.querySelector('.arrow'); // selectionne class pour afficher direction
+    const speed = document.querySelector('.speed-value'); // selectionne class pour afficher vitesse
 
-    navigator.geolocation.watchPosition((data) => {
-      console.log(data);
-      speed.textContent = data.coords.speed;
-      arrow.style.transform = `rotate(${data.coords.heading}deg)`;
-    }, (err) => {
-      console.error(err);
+    navigator.geolocation.watchPosition((data) => { // suivre la position avec .geolocalisation, watchPosition prend fn qui sera appelée chaque fois que la position user
+      console.log(data); // affiche position de user dans console du nav
+      speed.textContent = data.coords.speed; // met à jour la vitesse de déplacement de user (obect : coords) et renvoyer à watchPosition
+      arrow.style.transform = `rotate(${data.coords.heading}deg)`; // met à jour rotation "arrow" avec déplacement user
+    }, (err) => { // ${} donne la valeur de direction
+      console.error(err); // si error alors on l'affiche dans console
     });
   </script>
 </body>
