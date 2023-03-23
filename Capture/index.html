@@ -53,11 +53,11 @@
   }
 
   divs.forEach(div => div.addEventListener('click', logText, {
-    capture: false,
-    once: true
+    capture: false, // si événement doit être capturé pendant la phase de capture (true) ou propagation (false)
+    once: true // si événement écouté qu'une seule fois (true) ou continuellement (false). Une fois que l'événement a été déclenché, l'écouteur est automatiquement supprimé.
   }));
 
-  button.addEventListener('click', () => { // à chaque clic la fonction est appéllé
+  button.addEventListener('click', () => { // à chaque clic la fonction est appéllé et récupère class
     console.log('Click!!!');
   }, {
     once: true
