@@ -41,29 +41,29 @@
   let startX;
   let scrollLeft;
 
-  slider.addEventListener('mousedown', (e) => {
+  slider.addEventListener('mousedown', (e) => { // lorsque click alors isDown true = class .active
     isDown = true;
     slider.classList.add('active');
-    startX = e.pageX - slider.offsetLeft;
-    scrollLeft = slider.scrollLeft;
+    startX = e.pageX - slider.offsetLeft; // définit en fonction de la position de la souris
+    scrollLeft = slider.scrollLeft; // définit en fonction de la position de la souris
   });
 
-  slider.addEventListener('mouseleave', () => {
+  slider.addEventListener('mouseleave', () => { // la souris quitte et relache la zone
     isDown = false;
     slider.classList.remove('active');
   });
 
-  slider.addEventListener('mouseup', () => {
-    isDown = false;
+  slider.addEventListener('mouseup', () => { // lorsque arret du click ou sort de zone
+    isDown = false; // false est réactivé
     slider.classList.remove('active');
   });
 
-  slider.addEventListener('mousemove', (e) => {
+  slider.addEventListener('mousemove', (e) => { // lorsque déplace souris
     if (!isDown) return;  // stop the fn from running
     e.preventDefault();
-    const x = e.pageX - slider.offsetLeft;
+    const x = e.pageX - slider.offsetLeft; // récupère la position et calcule la distance parcourue
     const walk = (x - startX) * 3;
-    slider.scrollLeft = scrollLeft - walk;
+    slider.scrollLeft = scrollLeft - walk; // pour définir la nouvelle position
   });
 
 </script>
