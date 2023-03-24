@@ -24,7 +24,7 @@ function timer(seconds) {
   }, 1000);
 }
 
-function displayTimeLeft(seconds) {
+function displayTimeLeft(seconds) { // temps en seconds
   const minutes = Math.floor(seconds / 60);
   const remainderSeconds = seconds % 60;
   const display = `${minutes}:${remainderSeconds < 10 ? '0' : '' }${remainderSeconds}`;
@@ -32,7 +32,7 @@ function displayTimeLeft(seconds) {
   timerDisplay.textContent = display;
 }
 
-function displayEndTime(timestamp) {
+function displayEndTime(timestamp) { // affiche le temps restant
   const end = new Date(timestamp);
   const hour = end.getHours();
   const adjustedHour = hour > 12 ? hour - 12 : hour;
@@ -46,7 +46,8 @@ function startTimer() {
 }
 
 buttons.forEach(button => button.addEventListener('click', startTimer));
-document.customForm.addEventListener('submit', function(e) {
+
+document.customForm.addEventListener('submit', function(e) { // entrez un timer et le transmet à timer
   e.preventDefault();
   const mins = this.minutes.value;
   console.log(mins);
