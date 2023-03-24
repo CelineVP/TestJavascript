@@ -25,19 +25,19 @@ function timer(seconds) {
 }
 
 function displayTimeLeft(seconds) { // temps en seconds
-  const minutes = Math.floor(seconds / 60);
-  const remainderSeconds = seconds % 60;
-  const display = `${minutes}:${remainderSeconds < 10 ? '0' : '' }${remainderSeconds}`;
+  const minutes = Math.floor(seconds / 60); // arrondir minutes en seconds
+  const remainderSeconds = seconds % 60; // récupère le reste des seconds
+  const display = `${minutes}:${remainderSeconds < 10 ? '0' : '' }${remainderSeconds}`; // affiche les min et le restes des seconds
   document.title = display;
   timerDisplay.textContent = display;
 }
 
-function displayEndTime(timestamp) { // affiche le temps restant
+function displayEndTime(timestamp) { // affiche le temps par rapport à l'heure en cours
   const end = new Date(timestamp);
   const hour = end.getHours();
   const adjustedHour = hour > 12 ? hour - 12 : hour;
   const minutes = end.getMinutes();
-  endTime.textContent = `Be Back At ${adjustedHour}:${minutes < 10 ? '0' : ''}${minutes}`;
+  endTime.textContent = `Be Back At ${adjustedHour}:${minutes < 10 ? '0' : ''}${minutes}`; // affiche l'heure de retour
 }
 
 function startTimer() {
